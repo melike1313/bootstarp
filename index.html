@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yılbaşı Çarkıfeleği</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    #wheel {
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      position: relative;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      background-color: #fff;
+    }
+    .section {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .section:nth-child(even) {
+      background-color: #f0f0f0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<div id="wheel">
+  <div class="section">Yılbaşı Şapkası</div>
+  <div class="section">El Yapımı Kart</div>
+  <div class="section">Mum Seti</div>
+  <div class="section">Çikolata Kutusu</div>
+  <div class="section">Oyuncak Ayı</div>
+  <div class="section">Kahve Fincanı</div>
+  <div class="section">Yılbaşı Süsleri</div>
+  <div class="section">Kitap Hediye Çeki</div>
+  <div class="section">Parfüm Seti</div>
+  <div class="section">Ev Terliği</div>
+</div>
+
+<button id="spinButton">Çevir!</button>
+
+<script>
+  const wheel = document.getElementById('wheel');
+  const sections = document.querySelectorAll('.section');
+  const spinButton = document.getElementById('spinButton');
+
+  spinButton.addEventListener('click', spinWheel);
+
+  function spinWheel() {
+    spinButton.disabled = true;
+
+    const randomDegree = 720 + Math.floor(Math.random() * 360);
+    wheel.style.transition = 'transform 3s ease-out';
+    wheel.style.transform = `rotate(${randomDegree}deg)`;
+
+    setTimeout(() => {
+      spinButton.disabled = false;
+      wheel.style.transition = 'none';
+    }, 3000);
+  }
+
+  sections.forEach((section, index) => {
+    const rotation = (index / sections.length) * 360;
+    section.style.transform = `rotate(${rotation}deg)`;
+  });
+</script>
+
+</body>
+</html>
